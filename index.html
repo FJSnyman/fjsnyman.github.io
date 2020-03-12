@@ -1,1 +1,122 @@
-Hello World!
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Francois Snyman | GitHub IO</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300|Cormorant+Infant:300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style/common.css" />
+	<link rel="stylesheet" type="text/css" href="style/theme.css" />
+
+	<template id="template-histitem">
+		<div class="row">
+			<div class="lhs-block">
+				<span class="title">${litem-when}</span>
+			</div>
+			<div class="rhs-block">
+				<span class="title history-title">${prop-title}</span>
+				<span class="comment">${prop-comment}</span>
+			</div>
+		</div>
+	</template>
+
+	<template id="template-skillitem">
+		<div class="row">
+			<div class="lhs-block">
+				<span class="title">${prop-title}</span>
+			</div>
+			<div class="rhs-block">
+				<ul class="skill-items">
+					<li class="item">${litem-item}</li>
+				</ul>
+			</div>
+		</div>
+	</template>
+
+	<template id="template-interestitem">
+		<li class="item">${litem-interest}</li>
+	</template>
+
+	<template id="template-downloaditem">
+		<a href="${prop-href}">
+			<img src="${prop-thumb}" alt="${prop-name}">
+			<label class="caption">${prop-name}</label>
+		</a>
+	</template>
+
+	<script src="data.js"></script>
+</head>
+
+<body data-theme="dark">
+	<div id="toggle" onclick="let n = document.body.getAttribute('data-theme') == 'dark' ? 'light' : 'dark'; document.body.setAttribute('data-theme', n); cset('theme', n);">
+		<div id="slider">
+			<img src="ico/light.png" alt="light">
+			<img src="ico/dark.png" alt="dark">
+		</div>
+	</div>
+
+	<div id="main">
+
+		<h1>Curriculum Vitae</h1>
+
+		<hr class="soft-rule" />
+
+		<div id="personal-info" class="section">
+			<h2 id="name"></h2>
+			<h3 id="email"></h3>
+			<div id="cover" class="comment">
+			</div>
+		</div>
+
+		<div id="history" class="section">
+
+			<h2 class="section-name">Education &amp; Work History</h2>
+
+		</div>
+
+		<div id="skills" class="section">
+
+			<h2 class="section-name">Core Skills</h2>
+
+		</div>
+
+		<div id="interests" class="section">
+
+			<h2 class="section-name">Interests</h2>
+
+			<ul class="interest-items">
+			</ul>
+
+		</div>
+
+		<div id="downloads" class="section">
+
+			<h2 class="section-name">Downloads</h2>
+
+			<div class="gallery">
+			</div>
+
+		</div>
+
+		<div id="footnote">
+
+			<span>References and Documents Available on Request</span>
+
+		</div>
+
+	</div>
+</body>
+
+<script>
+	const cget = (k) => {
+		let t = RegExp(`(?:(?:^|\\s|;)(?:${k}=)(?:[^;]*))`).exec(document.cookie);
+		return (t === undefined || t === null ? null : t[0].split('=')[1]);
+	}
+	const cset = (k, v) => document.cookie = `${k}=${v};expires=${new Date(Date.now() + 604800000).toISOString()}`;
+	document.body.style["transition"] = "none";
+	document.body.setAttribute('data-theme', cget('theme'));
+	setTimeout(() => document.body.style["transition"] = "", 810);
+	CVData.populateData();
+</script>
+
+</html>
