@@ -234,15 +234,32 @@ class CVData {
 
 	// Fetch downloadable attachments - ignored if null
 	static downloads() {
-		/* e.g.
-			return [
-				{
-					"name": "Letter of Recommendation",
-					"thumb": "thumbs/company-logo.jpg"
-					"href": "files/letter.pdf"
-				}
-			];
-		*/
-		return null;
+		return [
+			{
+				"name": "UP Academic Record",
+				"thumb": "thumbs/tuks.jpg",
+				"href": "downloads/annex/up_academic_record_2019.pdf"
+			},
+			{
+				"name": "IITPSA Membership",
+				"thumb": "thumbs/iitpsa.jpg",
+				"href": "downloads/annex/iitpsa_membership_2016.pdf"
+			},
+			{
+				"name": "NSC",
+				"thumb": "thumbs/ieb.jpg",
+				"href": "downloads/annex/nsc_2016.pdf"
+			},
+			{
+				"name": "TMC Testemonial",
+				"thumb": "thumbs/tmc.jpg",
+				"href": "downloads/annex/testemonial_tmc_2016.pdf"
+			},
+			{
+				"name": "IT Olympiad Certificate",
+				"thumb": "thumbs/olympiad.jpg",
+				"href": "downloads/annex/it_olympiad_2016.pdf"
+			},
+		];
 	}
 }

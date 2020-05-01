@@ -38,8 +38,10 @@
 	</template>
 
 	<template id="template-downloaditem">
-		<a href="${prop-href}">
-			<img src="${prop-thumb}" alt="${prop-name}">
+		<a href="${prop-href}" target="_blank">
+			<div class="gallery-item">
+				<img src="${prop-thumb}" alt="${prop-name}">
+			</div>
 			<label class="caption">${prop-name}</label>
 		</a>
 	</template>
@@ -100,7 +102,7 @@
 
 		<div id="footnote">
 
-			<span>References and Documents Available on Request</span>
+			<span>References and Additional Documents Available on Request</span>
 
 		</div>
 

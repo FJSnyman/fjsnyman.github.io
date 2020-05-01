@@ -158,32 +158,40 @@ li.item {
 	display: block;
 	max-width: 512px;
 	max-height: 512px;
+	width: 18%;
+}
+
+.gallery-item {
 	margin: 5px;
 	border: 1px solid var(--color-stroke-sc);
 	transition: 0.2s ease-out;
-	width: 18%;
 	border-radius: 25px;
 	overflow: hidden;
 	background: white;
 	box-shadow: 0 0 0 0 var(--color-background-pr);
-	transition: 0.15s 0.18s ease-out;
+	transition: 0.15s ease-out;
 }
 
-.gallery > a > img {
+.gallery-item > img {
 	width: 90%;
 	padding: 5%;
 }
 
-.gallery > a:hover {
+label.caption {
+	display: block;
+	text-align: center;
+	width: 100%;
+	opacity: 1;
+	transition: opacity 0.15s ease-out;
+}
+
+.gallery > a:hover > .gallery-item {
 	transform: scale(110%);
 	box-shadow: 0px 5px 12px 5px var(--color-background-pr);
 }
 
-label.caption {
-	text-align: center;
-	width: 100%;
-	display: block;
-	color: var(--color-background-pr);
+.gallery > a:hover > label.caption {
+	opacity: 0.2;
 }
 
 /* Decorative Elements */
