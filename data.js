@@ -117,8 +117,8 @@ class CVData {
 					"end":   Date.now(),
 					"name":  "2020 (March)",
 				}],
-				"title":   "U.P. Computer Science 301 Integration Team Member",
-				"comment": "Currently leading collaboration with sub-teams via Git repositories, and managing Integration team project management tools.<br/>Supporting role in API and app development efforts.",
+				"title":   "Member of Integration Team for U.P. Computer Science 301 Large Group Project",
+				"comment": "Currently leading collaboration with over 40 colleagues within sub-teams, maintaining Git repositories and business rules, and managing my Integration team's project management tools.<br/>Lead developer for app back-end, controllers, and unit testing.",
 			},
 			{
 				"periods": [{
@@ -207,8 +207,8 @@ class CVData {
 			{
 				"title": "Organisational / Managerial",
 				"items": [
-					"Large group task assignment and active communication, learned during several management roles including March 2020 Integration management.",
-					"Experience with process-driven project management tools such as Trello, Jira (version and issue tracking), Git configuration and pipelining, and continuous integration (using Jenkins).",
+					"Large group task assignment and active communication, learned during several management roles including 2020 Integration management.",
+					"Experience with process-driven project management tools such as Trello, Jira (version and issue tracking), Git configuration and pipelining, and continuous integration.",
 				],
 			},
 			{
