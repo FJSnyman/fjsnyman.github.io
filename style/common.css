@@ -1,5 +1,7 @@
 /* Global Constant Fonts and Colours */
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@300&family=Roboto+Slab:wght@300&display=swap');
+
 :root {
 	--font-title: 'Cormorant Infant', serif;
 	--font-body: 'Roboto Slab', serif;
@@ -86,13 +88,13 @@ h2.section-name:after {
 	content: ' ~ ';
 }
 
-span.title {
+.title {
 	display: block;
 	font-size: 12pt;
 	line-height: 14pt;
 }
 
-span.comment {
+.comment {
 	font-size: 10pt;
 	color: var(--color-stroke-sc);
 }
