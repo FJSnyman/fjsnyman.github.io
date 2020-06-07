@@ -2,6 +2,8 @@ body, /* default */
 body[data-theme="dark"] {
 	--color-stroke-pr: #D9D9D9; /* 85% Grey */
 	--color-stroke-sc: #A5A5A5; /* 25% Grey */
+	
+	--color-stroke-selectable: rgb(72, 190, 245); /* Selectable Blue */
 
 	--color-stroke-error: #FF0F0F; /* Error Red */
 	--color-stroke-success: #C4FF60; /* Success Green */
@@ -15,6 +17,8 @@ body[data-theme="dark"] {
 body[data-theme="light"] {
 	--color-stroke-pr: #202020;
 	--color-stroke-sc: #696969;
+
+	--color-stroke-selectable: rgb(14, 65, 143);
 
 	--color-stroke-error: #D00;
 	--color-stroke-success: #0A0;
