@@ -1,3 +1,4 @@
-# Directories with currently unwanted charing elements
+# Directories with currently private/unwanted elements
 downloads/_private
 thumbs/_ignore
+survey/
