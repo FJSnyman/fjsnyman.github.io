@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Usability Tests</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="../style/common.css" />
+	<link rel="stylesheet" type="text/css" href="../style/theme.css" />
+	<link rel="stylesheet" type="text/css" href="prototype.css" />
+
+	<script>
+		function toggleTheme() {
+			let n = document.body.getAttribute('data-theme') == 'dark' ? 'light' : 'dark';
+			document.body.setAttribute('data-theme', n); cset('theme', n);
+			console.log("Switched theme to " + n);
+		}
+	</script>
+</head>
+
+<body data-theme="dark">
+	<div id="toggle" onclick="toggleTheme()">
+		<div id="slider">
+			<img src="../ico/light.png" alt="light">
+			<img src="../ico/dark.png" alt="dark">
+		</div>
+	</div>
+
+	<div id="main">
+
+		<h1>Devs With Benefits</h1>
+
+		<hr class="soft-rule" />
+
+		<div id="alt-intro" class="alt-panel">
+			<h2>Some formalities before you continue...</h2>
+
+			<p class="comment">
+				By continuing to our live prototype, you are consenting to have your participation
+				in this usability testing session noted and video-recorded for use in analysis and
+				design improvement. Your video will never be shared or used to identify you, and
+				will be deleted once its contents has been used for our usibility analysis.
+			</p>
+			<p class="comment">
+				During this session, you will be shown a concept design for what we think marks
+				an improvement to existing budget-management apps out there. Because this is
+				only a concept, some features might not work perfectly and changes you make
+				like registering an account or updating settings might not have any effect. We ask
+				that you try look past these limitations.
+			</p>
+			<p class="comment">
+				When you use the prototype, we will ask you to enact certain scenarios and see
+				how easily you do so. The more you ask questions and explain your actions during
+				this process the more we can understand how to improve our product, so please
+				be as vocal as you want!
+			</p>
+			<p class="comment">
+				Our lecturer who will jump in at times to see how everyone is doing, but beyond
+				that your time here is between you and your host (Xnader or Francois).<br />
+				If you have any questions or concerns, now or later, let us know and we handle it
+				immediately.
+			</p>
+
+			<div class="button-row">
+				<button id="accept" class="button">Accept</button>
+				<button id="reject" class="button">Leave</button>
+			</div>
+		</div>
+
+		<div id="alt-redirecting" class="alt-panel hidden">
+			<h2 style="text-align:center">Fantastic!</h2>
+			<h2 style="text-align:center">Redirecting you to the live demo now...</h2>
+		</div>
+
+		<div id="alt-rejected" class="alt-panel hidden">
+			<h2 style="text-align:center">We're sorry the hear that :'(</h2>
+
+			<p class="comment">
+				...but we understand and respect your concern for privacy. If you have a change of
+				heart, please feel free to come join is again!
+			</p>
+			<p class="comment">
+				Thank you so much for your time.<br />
+				- Francois and Xander
+			</p>
+		</div>
+
+	</div>
+
+</body>
+
+<script>
+	document.getElementById('accept').onclick = function () {
+		document.getElementById('alt-intro').classList.add('hidden');
+		document.getElementById('alt-redirecting').classList.remove('hidden');
+		setTimeout(() => window.location = "https://xd.adobe.com/view/ad6eeeb9-66a6-4e27-46a4-a59a7594942b-db5f/screen/efd5f862-59ca-4d62-b774-6ea8d2258996/Login?fullscreen&hints=off", 2000);
+	};
+	document.getElementById('reject').onclick = function () {
+		document.getElementById('alt-intro').classList.add('hidden');
+		document.getElementById('alt-rejected').classList.remove('hidden');
+	};
+</script>
+
+<script>
+	const cget = (k) => {
+		let t = RegExp(`(?:(?:^|\\s|;)(?:${k}=)(?:[^;]*))`).exec(document.cookie);
+		return (t === undefined || t === null ? null : t[0].split('=')[1]);
+	}
+	const cset = (k, v) => document.cookie = `${k}=${v};expires=${new Date(Date.now() + 604800000).toISOString()}`;
+	document.body.style["transition"] = "none";
+	document.body.setAttribute('data-theme', cget('theme'));
+	setTimeout(() => document.body.style["transition"] = "", 810);
+</script>
+
+</html>

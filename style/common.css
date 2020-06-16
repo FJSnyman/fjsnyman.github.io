@@ -30,8 +30,8 @@ body{
 }
 
 body>#main{
-	min-height: 100vh;
-	padding: 30px 10%;
+	min-height: 80vh;
+	margin: 30px 10%;
 	width: 80%;
 }
 
