@@ -1,5 +1,5 @@
 # Directories with currently private/unwanted elements
-downloads/_private
+downloads
 thumbs/_ignore
 survey/
 prototype/
