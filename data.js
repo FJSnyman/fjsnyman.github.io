@@ -1,9 +1,13 @@
+Date.prototype.compareTo = function(that) {return this.valueOf() - that.valueOf()}
+Number.prototype.orIfZero = function(callback) {return this != 0 ? this : callback()}
+
 class CVData {
 	static populateData() {
 		// Personal Info
 		let personalInfo = this.personalInfo();
 		document.getElementById("name").innerHTML = personalInfo.name;
 		document.getElementById("email").innerHTML = personalInfo.email;
+		document.getElementById("email-link").href = `mailto:${personalInfo.email}`;
 		document.getElementById("cover").innerHTML = personalInfo.cover;
 
 		// Work history
@@ -14,7 +18,7 @@ class CVData {
 			let whenSpace = histTemplate.match(/(.*)\$\{litem-when\}(.*)/);
 
 			let collection = [];
-			history.sort((a,b) => b.periods[0]['start'].valueOf() - a.periods[0]['start'].valueOf());
+			history.sort((a,b) => b.periods[0]['end'].compareTo(a.periods[0]['end']).orIfZero(() => b.periods[0]['start'].compareTo(a.periods[0]['start'])));
 			for (const item of history) {
 				let element = histTemplate
 					.replace("${prop-title}", item.title)
@@ -103,8 +107,8 @@ class CVData {
 	static personalInfo() {
 		return {
 			"name":  "Francois Snyman",
-			"email": "francois.snyman@tuks.co.za",
-			"cover": "I am a final year BSc Computer Science student at the University of Pretoria with a strong understanding of programming languages and a wide variety software development technologies. I learn quickly, work well in a team and can rapidly solve problems - crucial skills in the world of software development.",
+			"email": "hello@fjsnyman.co.za",
+			"cover": "I am a software developer with several years of experience working in small- and medium-sized teams. I learn quickly, work well in a team and can rapidly solve problems - crucial skills in the world of software development.",
 		};
 	}
 
@@ -113,33 +117,69 @@ class CVData {
 		return [
 			{
 				"periods": [{
+					"start": new Date("2021-01-18"),
+					"end":   new Date(),
+					"name":  "2021 - Present",
+				}],
+				"title":   "Java Developer at Kwaden Software Development",
+				"comment": "",
+			},
+			{
+				"periods": [{
+					"start": new Date("2020-05-01"),
+					"end":   new Date("2020-10-15"),
+					"name":  "2020",
+				}],
+				"title":   "Developed \"Truckin-IT\" PoC mobile app as part of Computer Science 301 Industry Project",
+				"comment": "Developed mobile app internal systems and API integration, managed Git repositories, and managed app store publishing",
+			},
+			{
+				"periods": [{
 					"start": new Date("2020-03-09"),
-					"end":   Date.now(),
-					"name":  "2020 (March)",
+					"end":   new Date("2020-06-31"),
+					"name":  "2020",
 				}],
 				"title":   "Member of Integration Team for U.P. Computer Science 301 Large Group Project",
-				"comment": "Currently leading collaboration with over 40 colleagues within sub-teams, maintaining Git repositories and business rules, and managing my Integration team's project management tools.<br/>Lead developer for app back-end, controllers, and unit testing.",
+				"comment": "Lead collaboration with over 40 colleagues within sub-teams, maintained Git repositories and business rules, and managed Integration team's project management tools.<br/>Lead developer for app back-end, controllers, and unit testing.",
+			},
+			{
+				"periods": [{
+					"start": new Date("2020-02-01"),
+					"end":   new Date("2020-11-30"),
+					"name":  "2020",
+				}],
+				"title":   "Co-Developed ARCRA PoC Mobile App",
+				"comment": "Developed standalone Android app developed as proof-of-concept using Dart & Flutter",
 			},
 			{
 				"periods": [{
 					"start": new Date("2019-03-01"),
-					"end":   Date.now(),
-					"name":  "2019 (March) - Present",
+					"end":   new Date("2020-11-30"),
+					"name":  "2019 - 2020",
 				}],
 				"title":   "Co-Developed TuksFM Mobile App",
 				"comment": "Acted primarily as back-end developer (MySQL + PHP API for legacy compatibility; Dart & Flutter for app-side API calls).",
 			},
 			{
+				"periods": [{
+					"start": new Date("2018-01-01"),
+					"end":   new Date("2020-12-31"),
+					"name":  "2018 - 2020",
+				}],
+				"title":   "Completed BSc Computer Science degree with distinction at University of Pretoria",
+				"comment": "Learned invaluable skills in computing, mathematics, and time- and stress-management at one of South Africa's most highly rated Computer Science departments",
+			},
+			{
 				"periods": [
-					{
-						"start": new Date("2018-11-21"),
-						"end":   new Date("2018-12-21"),
-						"name":  "2018 (Dec)",
-					},
 					{
 						"start": new Date("2019-11-21"),
 						"end":   new Date("2019-12-21"),
 						"name":  "2019 (Dec)",
+					},
+					{
+						"start": new Date("2018-11-21"),
+						"end":   new Date("2018-12-21"),
+						"name":  "2018 (Dec)",
 					},
 				],
 				"title":  "Front-End Development Internship at Kwaden Software Development",
@@ -147,18 +187,9 @@ class CVData {
 			},
 			{
 				"periods": [{
-					"start": new Date("2018-01-01"),
-					"end":   Date.now(),
-					"name":  "2018 - Present",
-				}],
-				"title":   "Ongoing BSc Computer Science degree at University of Pretoria",
-				"comment": "Currently studying year 3. Received Golden Key Society invitations for years 1 and 2.",
-			},
-			{
-				"periods": [{
 					"start": new Date("2017-06-01"),
 					"end":   new Date("2017-12-31"),
-					"name":  "2017 (Jul - Dec)",
+					"name":  "2017",
 				}],
 				"title":  "Full-Time Intern at FirstView Media",
 				"comment": "Primarily acted as MySQL, PHP, JS developer and managed several remote servers. Also aided HTML & CSS development and performed full-stack development for smaller one-man projects.",
@@ -201,14 +232,14 @@ class CVData {
 				"items": [
 					"High proficiency in Java, Dart, PHP, JS, SQL (primarily MySQL), and C++.",
 					"Moderate proficiency in HTML, CSS, Go, and C#",
-					"Experience with ground-up API development, Flutter, Docker & Kubernetes, and advanced Git use.",
+					"Experience with ground-up API development, Flutter, Docker, and Git.",
 				],
 			},
 			{
 				"title": "Organisational / Managerial",
 				"items": [
-					"Large group task assignment and active communication, learned during several management roles including 2020 Integration management.",
-					"Experience with process-driven project management tools such as Trello, Jira (version and issue tracking), Git configuration and pipelining, and continuous integration.",
+					"Large group task assignment and active communication, learned during several management roles at school and university.",
+					"Experience with project management tools and continuous integration systems.",
 				],
 			},
 			{
@@ -217,7 +248,7 @@ class CVData {
 					"Can clearly present and discuss development goals and concepts at various levels of complexity as needed, such as with coworkers or clients.",
 					"Able to maintain clear, calm discussion when experiencing confusion or stubbornnes with others.",
 					"Quick to build and maintain strong relationships with clients and coworkers.",
-					"Can establish and maintain short- and long-term goals with teammates.",
+					"Can establish and maintain vision of short- and long-term goals with teammates.",
 				],
 			},
 		];
@@ -238,7 +269,7 @@ class CVData {
 			{
 				"name": "UP Academic Record",
 				"thumb": "thumbs/tuks.jpg",
-				"href": "downloads/annex/up_academic_record_2019.pdf"
+				"href": "downloads/annex/up_academic_record_2020.pdf"
 			},
 			{
 				"name": "IITPSA Membership",
