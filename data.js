@@ -126,6 +126,15 @@ class CVData {
 			},
 			{
 				"periods": [{
+					"start": new Date("2021-03-18"),
+					"end": new Date("2021-05-26"),
+					"name": "Early 2021"
+				}],
+				"title": "Received accolades from University of Pretoria",
+				"comment": "Received several awards during graduation and award ceremonies:<ul><li>graduated with distinction (75.2% aggregate)</li><li>2nd runner-up for top achiever in BSc Computer Science</li><li>industry project group winner for Best Architectural Awareness and Software Engineering Excellence</li></ul>"
+			},
+			{
+				"periods": [{
 					"start": new Date("2020-05-01"),
 					"end":   new Date("2020-10-15"),
 					"name":  "2020",
