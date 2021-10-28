@@ -121,8 +121,8 @@ class CVData {
 					"end":   new Date(),
 					"name":  "2021 - Present",
 				}],
-				"title":   "Java Developer at Kwaden Software Development",
-				"comment": "",
+				"title":   "Software Developer at Kwaden Software Development",
+				"comment": "Primarily devloping microservices using Spring and Java, with regular full-stack exposure to other system elements from the front-end (React-JS) to infrastructure (Kubernetes cluster management).",
 			},
 			{
 				"periods": [{
@@ -239,9 +239,11 @@ class CVData {
 			{
 				"title": "Software Development",
 				"items": [
-					"High proficiency in Java, Dart, PHP, JS, SQL (primarily MySQL), and C++.",
-					"Moderate proficiency in HTML, CSS, Go, and C#",
-					"Experience with ground-up API development, Flutter, Docker, and Git.",
+					"High proficiency in Java SE, Dart, native JS, SQL, and Bash Scripting.",
+					"Moderate proficiency in HTML, CSS, PHP, Go, and C++.",
+					"Highly familiar with RESTful (using JSON) and GraphQL API architectures.",
+					"Experienced with both ground-up software development, and frameworks like Spring and Flutter.",
+					"Experienced with standard development tools such as Docker and Git."
 				],
 			},
 			{
@@ -266,9 +268,10 @@ class CVData {
 	// Fetch personal interests - ignored if null
 	static interests() {
 		return [
-			"Software Engineering and Research",
-			"Digital Artistry, 2D and 3D",
-			"Designing, Developing, and Playing Video Games",
+			"Software engineering and research",
+			"Woodwork and home improvement",
+			"Digital artistry, both 2D and 3D",
+			"Designing, developing, and playing video games",
 		];
 	}
 
@@ -286,6 +289,11 @@ class CVData {
 				"href": "downloads/annex/iitpsa_membership_2016.pdf"
 			},
 			{
+				"name": "IT Olympiad Certificate",
+				"thumb": "thumbs/olympiad.jpg",
+				"href": "downloads/annex/it_olympiad_2016.pdf"
+			},
+			{
 				"name": "NSC",
 				"thumb": "thumbs/ieb.jpg",
 				"href": "downloads/annex/nsc_2016.pdf"
@@ -294,12 +302,7 @@ class CVData {
 				"name": "TMC Testemonial",
 				"thumb": "thumbs/tmc.jpg",
 				"href": "downloads/annex/testemonial_tmc_2016.pdf"
-			},
-			{
-				"name": "IT Olympiad Certificate",
-				"thumb": "thumbs/olympiad.jpg",
-				"href": "downloads/annex/it_olympiad_2016.pdf"
-			},
+			}
 		];
 	}
 }
