@@ -74,7 +74,7 @@ h3#email:after {
 
 #cover {
 	padding: 10px;
-	text-align: justify;
+	text-align: center;
 }
 
 h2.section-name {
@@ -95,7 +95,7 @@ h2.section-name:after {
 }
 
 .comment {
-	font-size: 10pt;
+	font-size: 11pt;
 	color: var(--color-stroke-sc);
 }
 
@@ -161,6 +161,7 @@ li.item {
 	max-width: 512px;
 	max-height: 512px;
 	width: 18%;
+	text-decoration: none;
 }
 
 .gallery-item {
@@ -180,20 +181,21 @@ li.item {
 }
 
 label.caption {
+	color: var(--color-stroke-pr);
 	display: block;
 	text-align: center;
 	width: 100%;
 	opacity: 1;
-	transition: opacity 0.15s ease-out;
+	transition: opacity 0.15s, color 0.8s;
 }
 
 .gallery > a:hover > .gallery-item {
-	transform: scale(110%);
-	box-shadow: 0px 5px 12px 5px var(--color-background-pr);
+	transform: scale(102%);
+	box-shadow: 0px 5px 12px 5px var(--color-background-sc);
 }
 
 .gallery > a:hover > label.caption {
-	opacity: 0.2;
+	opacity: .1;
 }
 
 /* Decorative Elements */

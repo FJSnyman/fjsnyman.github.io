@@ -9,7 +9,7 @@ body[data-theme="dark"] {
 	--color-stroke-success: #C4FF60; /* Success Green */
 
 	--color-background-pr: #0F0F0F; /*  6% Grey */
-	--color-background-sc: #262626; /* 11% Grey */
+	--color-background-sc: #0C0C0C; /* 11% Grey */
 
 	--color-background-pr-transparent: #0F0F0F00; /*  6% Grey, 0 opacity */
 }
@@ -23,7 +23,7 @@ body[data-theme="light"] {
 	--color-stroke-error: #D00;
 	--color-stroke-success: #0A0;
 
-	--color-background-pr: #DFDFDF;
+	--color-background-pr: #FFFFFF;
 	--color-background-sc: #AFAFAF;
 
 	--color-background-pr-transparent: #FAFACB00;
