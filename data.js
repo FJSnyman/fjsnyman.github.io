@@ -8,7 +8,7 @@ class CVData {
 		document.getElementById("name").innerHTML = personalInfo.name;
 		document.getElementById("email").innerHTML = personalInfo.email;
 		document.getElementById("email-link").href = `mailto:${personalInfo.email}`;
-		document.getElementById("cover").innerHTML = personalInfo.cover;
+		document.getElementById("cover").innerHTML = personalInfo.cover.join("<br/>");
 
 		// Work history
 		let history = this.history();
@@ -108,7 +108,10 @@ class CVData {
 		return {
 			"name":  "Francois Snyman",
 			"email": "hello@fjsnyman.co.za",
-			"cover": "I am a software developer with several years of experience working in small- and medium-sized teams. I learn quickly, work well in a team and can rapidly solve problems - crucial skills in the world of software development.",
+			"cover": [
+				"I am a software developer with experience in various programming languages and software development tools, currently specialising in Java Spring microservices and Kubernetes infrastructure management.",
+				"I love learning new skills to empower myself and my teammates in facing the latest and greatest challenges before us.",
+			],
 		};
 	}
 
@@ -122,7 +125,7 @@ class CVData {
 					"name":  "2021 - Present",
 				}],
 				"title":   "Software Developer at Kwaden Software Development",
-				"comment": "Primarily devloping microservices using Spring and Java, with regular full-stack exposure to other system elements from the front-end (React-JS) to infrastructure (Kubernetes cluster management).",
+				"comment": "Primarily developing microservices and APIs using Java Spring, data storage and communication using SQL & AMQP, and IAC & CICD for multiple Kubernetes clusters. Includes regular full-stack exposure to other system elements such as React-JS front-ends and legacy monoliths.",
 			},
 			{
 				"periods": [{
@@ -131,7 +134,7 @@ class CVData {
 					"name": "Early 2021"
 				}],
 				"title": "Received accolades from University of Pretoria",
-				"comment": "Received several awards during graduation and award ceremonies:<ul><li>graduated with distinction (75.2% aggregate)</li><li>2nd runner-up for top achiever in BSc Computer Science</li><li>industry project group winner for Best Architectural Awareness and Software Engineering Excellence</li></ul>"
+				"comment": "Received several awards during graduation and award ceremonies:<ul><li>graduated with distinction (75.2% aggregate)</li><li>2nd runner-up for top achiever in BSc Computer Science</li><li>industry project group winner for 'Best Architectural Awareness' and 'Software Engineering Excellence'</li></ul>"
 			},
 			{
 				"periods": [{
@@ -140,7 +143,7 @@ class CVData {
 					"name":  "2020",
 				}],
 				"title":   "Developed \"Truckin-IT\" PoC mobile app as part of Computer Science 301 Industry Project",
-				"comment": "Developed mobile app internal systems and API integration, managed Git repositories, and managed app store publishing",
+				"comment": "Developed mobile app's internal systems and API integration, managed Git repositories, and managed Android app store publishing",
 			},
 			{
 				"periods": [{
@@ -148,8 +151,8 @@ class CVData {
 					"end":   new Date("2020-06-31"),
 					"name":  "2020",
 				}],
-				"title":   "Member of Integration Team for U.P. Computer Science 301 Large Group Project",
-				"comment": "Lead collaboration with over 40 colleagues within sub-teams, maintained Git repositories and business rules, and managed Integration team's project management tools.<br/>Lead developer for app back-end, controllers, and unit testing.",
+				"title":   "Member of Core Integration Team for the U.P. Computer Science 301 \"Cornerstone\" Group Project",
+				"comment": "Acted as lead developer of mobile app's core engine, network controllers, and unit testing.<br/>Facilitated collaboration with over 40 colleagues grouped into sub-teams - lead inter-group communication and conflict management, maintained Git repositories and access control, and managed my team's internal project management tools.",
 			},
 			{
 				"periods": [{
@@ -158,7 +161,7 @@ class CVData {
 					"name":  "2020",
 				}],
 				"title":   "Co-Developed ARCRA PoC Mobile App",
-				"comment": "Developed standalone Android app developed as proof-of-concept using Dart & Flutter",
+				"comment": "Developed standalone proof-of-concept radio app on Android using Dart & Flutter.",
 			},
 			{
 				"periods": [{
@@ -167,7 +170,7 @@ class CVData {
 					"name":  "2019 - 2020",
 				}],
 				"title":   "Co-Developed TuksFM Mobile App",
-				"comment": "Acted primarily as back-end developer (MySQL + PHP API for legacy compatibility; Dart & Flutter for app-side API calls).",
+				"comment": "Acted primarily as back-end developer (MySQL + PHP to extend legacy API; Dart & Flutter for app-side API calls).",
 			},
 			{
 				"periods": [{
@@ -176,7 +179,7 @@ class CVData {
 					"name":  "2018 - 2020",
 				}],
 				"title":   "Completed BSc Computer Science degree with distinction at University of Pretoria",
-				"comment": "Learned invaluable skills in computing, mathematics, and time- and stress-management at one of South Africa's most highly rated Computer Science departments",
+				"comment": "Learned invaluable skills in software engineering, mathematics, and time- and stress-management at one of South Africa's most highly rated Computer Science departments.",
 			},
 			{
 				"periods": [
@@ -201,7 +204,7 @@ class CVData {
 					"name":  "2017",
 				}],
 				"title":  "Full-Time Intern at FirstView Media",
-				"comment": "Primarily acted as MySQL, PHP, JS developer and managed several remote servers. Also aided HTML & CSS development and performed full-stack development for smaller one-man projects.",
+				"comment": "Primarily acted as MySQL, PHP & JS developer and managed several remote servers. Also aided HTML & CSS development and performed full-stack development for solo projects.",
 			},
 			{
 				"periods": [{
@@ -209,8 +212,8 @@ class CVData {
 					"end":   new Date("2016-12-31"),
 					"name":  "2016",
 				}],
-				"title":  "Achieved National Senior Certificate (IEB)",
-				"comment": "Thomas More College (Kloof, KwaZulu-Natal)<br/><ul><li>Core Mathematics - 96% | Information Technology - 94%</li><li>Qualified for Mathematics Olympiad round 3 (semi-final) 2015</li></ul>",
+				"title":  "Achieved South African National Senior Certificate (IEB)",
+				"comment": "Thomas More College (Kloof, KwaZulu-Natal, ZA)<br/><ul><li>Core Mathematics - 96% | Information Technology - 94%</li><li>Finalist (Top 20 in SA) in South African Computing Olympiad 2016</li><li>Qualified for Mathematics Olympiad round 3 (semi-final) 2015</li></ul>",
 			},
 			{
 				"periods": [{
@@ -219,16 +222,7 @@ class CVData {
 					"name":  "2016",
 				}],
 				"title":  "Granted Student Membership to IITPSA (Institute of IT Professionals SA)",
-				"comment": "",
-			},
-			{
-				"periods": [{
-					"start": new Date("2016-11-01"),
-					"end":   new Date("2016-11-01"),
-					"name":  "2016",
-				}],
-				"title":  "Finalist (Top 20 in SA) in South African Computing Olympiad 2016",
-				"comment": "",
+				"comment": "Invited to join the institute to commemorate finalist placement in the South African Computing Olympiad 2016.",
 			},
 		];
 	}
@@ -239,27 +233,35 @@ class CVData {
 			{
 				"title": "Software Development",
 				"items": [
-					"High proficiency in Java SE, Dart, native JS, SQL, and Bash Scripting.",
-					"Moderate proficiency in HTML, CSS, PHP, Go, and C++.",
-					"Highly familiar with RESTful (using JSON) and GraphQL API architectures.",
-					"Experienced with both ground-up software development, and frameworks like Spring and Flutter.",
-					"Experienced with standard development tools such as Docker and Git."
+					"Highly proficient with industry-standard development tools such as Docker and Git.",
+					"Highly experienced with REST and GraphQL API architectures.",
+					"Experienced building software from the ground up, and usings frameworks like Spring Boot and Flutter.",
+					"Experienced with IAC and CICD using Kubernetes with GitOps techniques.",
 				],
 			},
 			{
-				"title": "Organisational / Managerial",
+				"title": "Programming Languages",
 				"items": [
-					"Large group task assignment and active communication, learned during several management roles at school and university.",
+					"High proficiency with Java SE, Dart, SQL, and Bash Scripting.",
+					"Moderate proficiency with HTML, CSS, native JS, PHP, and C++ 17.",
+					"Basic proficiency with Golang, Rust, Python, C#, native C, x86-64 assembly (NASM/YASM).",
+				],
+			},
+			{
+				"title": "Organisation & Leadership",
+				"items": [
+					"Experience as the lead developer and primary point of contact for multiple ongoing and legacy projects simultaneously.",
+					"Experience managing task assignment and facilitating communication in small and large teams with a flat hierarchy.",
 					"Experience with project management tools and continuous integration systems.",
 				],
 			},
 			{
 				"title": "Communication",
 				"items": [
-					"Can clearly present and discuss development goals and concepts at various levels of complexity as needed, such as with coworkers or clients.",
+					"Can clearly present and discuss development goals and concepts at various levels of complexity and transparency as needed, be it to expert developers to clients with minimal technical knowledge.",
 					"Able to maintain clear, calm discussion when experiencing confusion or stubbornnes with others.",
-					"Quick to build and maintain strong relationships with clients and coworkers.",
-					"Can establish and maintain vision of short- and long-term goals with teammates.",
+					"Quick to build and maintain strong relationships with coworkers, leaders and clients.",
+					"Can establish and maintain vision of short- and long-term goals for a project.",
 				],
 			},
 		];
@@ -269,8 +271,8 @@ class CVData {
 	static interests() {
 		return [
 			"Software engineering and research",
+			"Digital artistry and photography",
 			"Woodwork and home improvement",
-			"Digital artistry, both 2D and 3D",
 			"Designing, developing, and playing video games",
 		];
 	}
@@ -281,27 +283,27 @@ class CVData {
 			{
 				"name": "UP Academic Record",
 				"thumb": "thumbs/tuks.jpg",
-				"href": "downloads/annex/up_academic_record_2020.pdf"
+				"href": "downloads/annex/up_academic_record_2020.pdf",
 			},
 			{
 				"name": "IITPSA Membership",
 				"thumb": "thumbs/iitpsa.jpg",
-				"href": "downloads/annex/iitpsa_membership_2016.pdf"
+				"href": "downloads/annex/iitpsa_membership_2016.pdf",
 			},
 			{
 				"name": "IT Olympiad Certificate",
 				"thumb": "thumbs/olympiad.jpg",
-				"href": "downloads/annex/it_olympiad_2016.pdf"
+				"href": "downloads/annex/it_olympiad_2016.pdf",
 			},
 			{
 				"name": "NSC",
 				"thumb": "thumbs/ieb.jpg",
-				"href": "downloads/annex/nsc_2016.pdf"
+				"href": "downloads/annex/nsc_2016.pdf",
 			},
 			{
 				"name": "TMC Testemonial",
 				"thumb": "thumbs/tmc.jpg",
-				"href": "downloads/annex/testemonial_tmc_2016.pdf"
+				"href": "downloads/annex/testemonial_tmc_2016.pdf",
 			}
 		];
 	}
