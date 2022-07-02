@@ -1,2 +1,2 @@
 #!sh
-/usr/bin/docker build . -t fjsnyman.co.za/cv-site:latest
+/usr/bin/docker build . -t cv-site:latest
