@@ -20,7 +20,7 @@ a {
 
 /* Body */
 
-body{
+body {
 	background-color: var(--color-background-pr);
 	color: var(--color-stroke-pr);
 	font-family: var(--font-body);
@@ -29,7 +29,7 @@ body{
 	transition: background-color 0.8s, color 0.8s;
 }
 
-body>#main{
+body > #main {
 	min-height: 80vh;
 	margin: 30px 10%;
 	width: 80%;
@@ -231,8 +231,8 @@ body[data-theme='light'] > #toggle > #slider {
 	width: 2%;
 	max-width: 20px;
 	overflow: hidden;
-	bottom: 14px;
-	right: 14px;
+	top: 14px;
+	left: 14px;
 	opacity: 25%;
 }
 

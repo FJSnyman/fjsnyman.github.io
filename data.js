@@ -4,61 +4,92 @@ Number.prototype.orIfZero = function(callback) {return this != 0 ? this : callba
 class CVData {
 	static populateData() {
 		// Personal Info
-		let personalInfo = this.personalInfo();
+		const personalInfo = this.personalInfo();
 		document.getElementById("name").innerHTML = personalInfo.name;
 		document.getElementById("email").innerHTML = personalInfo.email;
 		document.getElementById("email-link").href = `mailto:${personalInfo.email}`;
 		document.getElementById("cover").innerHTML = personalInfo.cover.join("<br/>");
 
-		// Work history
-		let history = this.history();
-		if(history != null) {
-			let histList = document.getElementById("history");
-			let histTemplate = document.getElementById("template-histitem").innerHTML;
-			let whenSpace = histTemplate.match(/(.*)\$\{litem-when\}(.*)/);
+		// Work History
+		const workHistory = this.workHistory();
+		if(workHistory != null) {
+			const workList = document.getElementById("work-history");
+			const template = document.getElementById("template-histitem").innerHTML;
+			const period = template.match(/(.*)\$\{litem-when\}(.*)/);
 
-			let collection = [];
-			history.sort((a,b) => b.periods[0]['end'].compareTo(a.periods[0]['end']).orIfZero(() => b.periods[0]['start'].compareTo(a.periods[0]['start'])));
-			for (const item of history) {
-				let element = histTemplate
+			workHistory.sort((a,b) => b.periods[0]['end'].compareTo(a.periods[0]['end']).orIfZero(() => b.periods[0]['start'].compareTo(a.periods[0]['start'])));
+
+			const collection = [];
+			for (const item of workHistory) {
+				const element = template
 					.replace("${prop-title}", item.title)
 					.replace("${prop-comment}", item.comment);
 
 				item.periods.sort((a,b) => b.start.valueOf() - a.start.valueOf());
 				let whenString = "";
 				for(const p of item.periods) {
-					whenString += `${whenSpace[1]}${p['name']}${whenSpace[2]}`;
+					whenString += `${period[1]}${p['name']}${period[2]}`;
 				}
 				collection.push(element.replace(/<.*\$\{litem-when\}.*/, whenString));
 			}
 
-			let tm = document.createElement("template");
+			const tm = document.createElement("template");
 			tm.innerHTML = collection.join("\n");
-			histList.appendChild(tm.content);
+			workList.appendChild(tm.content);
 		} else {
-			document.getElementById("history").remove();
+			document.getElementById("work-history").remove();
+		}
+
+		// Education
+		const education = this.education();
+		if(education != null) {
+			const educationList = document.getElementById("education");
+			const template = document.getElementById("template-histitem").innerHTML;
+			const period = template.match(/(.*)\$\{litem-when\}(.*)/);
+
+			education.sort((a,b) => b.periods[0]['end'].compareTo(a.periods[0]['end']).orIfZero(() => b.periods[0]['start'].compareTo(a.periods[0]['start'])));
+
+			const collection = [];
+			for (const item of education) {
+				const element = template
+					.replace("${prop-title}", item.title)
+					.replace("${prop-comment}", item.comment);
+
+				item.periods.sort((a,b) => b.start.valueOf() - a.start.valueOf());
+				let periodString = "";
+				for(const p of item.periods) {
+					periodString += `${period[1]}${p['name']}${period[2]}`;
+				}
+				collection.push(element.replace(/<.*\$\{litem-when\}.*/, periodString));
+			}
+
+			const tm = document.createElement("template");
+			tm.innerHTML = collection.join("\n");
+			educationList.appendChild(tm.content);
+		} else {
+			document.getElementById("education").remove();
 		}
 
 		// Skills
-		let skills = this.skills();
+		const skills = this.skills();
 		if(skills != null) {
-			let skillList = document.getElementById("skills");
-			let skillTemplate = document.getElementById("template-skillitem").innerHTML;
-			let itemSpace = skillTemplate.match(/(.*)\$\{litem-item\}(.*)/);
+			const skillList = document.getElementById("skills");
+			const template = document.getElementById("template-skillitem").innerHTML;
+			const items = template.match(/(.*)\$\{litem-item\}(.*)/);
 
-			let collection = [];
+			const collection = [];
 			for (const skill of skills) {
-				let element = skillTemplate
+				const element = template
 					.replace("${prop-title}", skill.title);
 
 				let itemString = "";
 				for(const item of skill['items']) {
-					itemString += `${itemSpace[1]}${item}${itemSpace[2]}`;
+					itemString += `${items[1]}${item}${items[2]}`;
 				}
 				collection.push(element.replace(/<.*\$\{litem-item\}.*/, itemString));
 			}
 
-			let tm = document.createElement("template");
+			const tm = document.createElement("template");
 			tm.innerHTML = collection.join("\n");
 			skillList.appendChild(tm.content);
 		} else {
@@ -66,15 +97,15 @@ class CVData {
 		}
 
 		// Interests
-		let interests = this.interests();
+		const interests = this.interests();
 		if(interests != null) {
-			let interestList = document.getElementById("interests").children.item(1);
-			let interestTemplate = document.getElementById("template-interestitem").innerHTML;
-			let itemSpace = interestTemplate.match(/(.*)\$\{litem-interest\}(.*)/);
+			const interestList = document.getElementById("interests").children.item(1);
+			const template = document.getElementById("template-interestitem").innerHTML;
+			const items = template.match(/(.*)\$\{litem-interest\}(.*)/);
 
 			let itemString = "";
 			for(const item of interests) {
-				itemString += `${itemSpace[1]}${item}${itemSpace[2]}`;
+				itemString += `${items[1]}${item}${items[2]}`;
 			}
 			interestList.innerHTML = itemString;
 		} else {
@@ -82,21 +113,21 @@ class CVData {
 		}
 
 		// Downloads
-		let downloads = this.downloads();
+		const downloads = this.downloads();
 		if(downloads != null) {
-			let downloadList = document.getElementById("downloads").children.item(1);
-			let downloadTemplate = document.getElementById("template-downloaditem").innerHTML;
+			const downloadList = document.getElementById("downloads").children.item(1);
+			const template = document.getElementById("template-downloaditem").innerHTML;
 
-			let collection = [];
+			const collection = [];
 			for (const download of downloads) {
-				let element = downloadTemplate
+				const element = template
 					.replace(/\$\{prop-name\}/g, download.name)
 					.replace("${prop-thumb}", download.thumb)
 					.replace("${prop-href}", download.href);
 				collection.push(element);
 			}
 
-			let tm = document.createElement("template");
+			const tm = document.createElement("template");
 			tm.innerHTML = collection.join("\n");
 			downloadList.appendChild(tm.content);
 		} else {
@@ -116,7 +147,7 @@ class CVData {
 	}
 
 	// Fetch work history - ignored if null
-	static history() {
+	static workHistory() {
 		return [
 			{
 				"periods": [{
@@ -124,17 +155,8 @@ class CVData {
 					"end":   new Date(),
 					"name":  "2021 - Present",
 				}],
-				"title":   "Software Developer at Kwaden Software Development",
+				"title":   "Java Developer at Kwaden Software Development",
 				"comment": "Primarily developing microservices and APIs using Java Spring, data storage and communication using SQL & AMQP, and IAC & CICD for multiple Kubernetes clusters. Includes regular full-stack exposure to other system elements such as React-JS front-ends and legacy monoliths.",
-			},
-			{
-				"periods": [{
-					"start": new Date("2021-03-18"),
-					"end": new Date("2021-05-26"),
-					"name": "Early 2021"
-				}],
-				"title": "Received accolades from University of Pretoria",
-				"comment": "Received several awards during graduation and award ceremonies:<ul><li>graduated with distinction (75.2% aggregate)</li><li>2nd runner-up for top achiever in BSc Computer Science</li><li>industry project group winner for 'Best Architectural Awareness' and 'Software Engineering Excellence'</li></ul>"
 			},
 			{
 				"periods": [{
@@ -173,15 +195,6 @@ class CVData {
 				"comment": "Acted primarily as back-end developer (MySQL + PHP to extend legacy API; Dart & Flutter for app-side API calls).",
 			},
 			{
-				"periods": [{
-					"start": new Date("2018-01-01"),
-					"end":   new Date("2020-12-31"),
-					"name":  "2018 - 2020",
-				}],
-				"title":   "Completed BSc Computer Science degree with distinction at University of Pretoria",
-				"comment": "Learned invaluable skills in software engineering, mathematics, and time- and stress-management at one of South Africa's most highly rated Computer Science departments.",
-			},
-			{
 				"periods": [
 					{
 						"start": new Date("2019-11-21"),
@@ -203,8 +216,32 @@ class CVData {
 					"end":   new Date("2017-12-31"),
 					"name":  "2017",
 				}],
-				"title":  "Full-Time Intern at FirstView Media",
+				"title":  "Full-Time Intern & Junior Developer at FirstView Media",
 				"comment": "Primarily acted as MySQL, PHP & JS developer and managed several remote servers. Also aided HTML & CSS development and performed full-stack development for solo projects.",
+			},
+		];
+	}
+
+	// Fetch education - ignored if null
+	static education() {
+		return [
+			{
+				"periods": [{
+					"start": new Date("2021-03-18"),
+					"end": new Date("2021-05-26"),
+					"name": "Early 2021"
+				}],
+				"title": "Received accolades from University of Pretoria",
+				"comment": "Received several awards during graduation and award ceremonies:<ul><li>graduated with distinction (75.2% aggregate)</li><li>2nd runner-up for top achiever in BSc Computer Science</li><li>industry project group winner for 'Best Architectural Awareness' and 'Software Engineering Excellence'</li></ul>"
+			},
+			{
+				"periods": [{
+					"start": new Date("2018-01-01"),
+					"end":   new Date("2020-12-31"),
+					"name":  "2018 - 2020",
+				}],
+				"title":   "Completed BSc Computer Science degree with distinction at University of Pretoria",
+				"comment": "Learned invaluable skills in software engineering, mathematics, and time- and stress-management at one of South Africa's most highly rated Computer Science departments.",
 			},
 			{
 				"periods": [{
