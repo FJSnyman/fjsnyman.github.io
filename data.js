@@ -34,7 +34,7 @@ class CVData {
 			}
 
 			const tm = document.createElement("template");
-			tm.innerHTML = collection.join("\n");
+			tm.innerHTML = collection.join("<br/>");
 			workList.appendChild(tm.content);
 		} else {
 			document.getElementById("work-history").remove();
@@ -156,7 +156,7 @@ class CVData {
 					"name":  "2021 - Present",
 				}],
 				"title":   "Java Developer at Kwaden Software Development",
-				"comment": "Primarily developing microservices and APIs using Java Spring, data storage and communication using SQL & AMQP, and IAC & CICD for multiple Kubernetes clusters. Includes regular full-stack exposure to other system elements such as React-JS front-ends and legacy monoliths.",
+				"comment": "I design and develop microservices and APIs using Spring Boot (Java) with data storage built on MySQL, inter-service communication using AMQ, and deployed using IAC with Kubernetes and CICD using Jenkins and GitHub Actions. Common daily tasks include writing Bash or Powershell scripts. log monitoring and diagnostics, and cluster or remote server management via Rancher, Kubectl, or SSH as necessary.<br/>I have researched, presented and implemented the integration of several new techniques and technologies into our existing systems to improve performance, maintainability and user/developer experience. Presentations are made to directors and technical managers, then approved and managed via Jira project boards and documented using Confluence. As the owner of the proposal, I lead the project's implementation, subtask delegation and collaboration efforts with other developers.",
 			},
 			{
 				"periods": [{
@@ -164,8 +164,8 @@ class CVData {
 					"end":   new Date("2020-10-15"),
 					"name":  "2020",
 				}],
-				"title":   "Developed \"Truckin-IT\" PoC mobile app as part of Computer Science 301 Industry Project",
-				"comment": "Developed mobile app's internal systems and API integration, managed Git repositories, and managed Android app store publishing",
+				"title":   "Integration Developer at Truckin-IT",
+				"comment": "I co-developed the mobile app for an AI-driven shipping and logistics management solution which included automated load-sharing and driver route optimisation. My primary role was to develop the mobile app's internal library which executed RESTful API calls, managed response caching and batching (multiple requests on shared TCP sessions), and simplified API interaction and navigation for downstream systems via an promise-based abstraction layer.",
 			},
 			{
 				"periods": [{
@@ -173,8 +173,8 @@ class CVData {
 					"end":   new Date("2020-06-31"),
 					"name":  "2020",
 				}],
-				"title":   "Member of Core Integration Team for the U.P. Computer Science 301 \"Cornerstone\" Group Project",
-				"comment": "Acted as lead developer of mobile app's core engine, network controllers, and unit testing.<br/>Facilitated collaboration with over 40 colleagues grouped into sub-teams - lead inter-group communication and conflict management, maintained Git repositories and access control, and managed my team's internal project management tools.",
+				"title":   "Integration Developer for large-team university project",
+				"comment": "I acted as lead developer for an AI-driven speech-to-image mobile app, managing development of the core engine, network controllers, and unit testing.<br/>I also managed collaboration with over 40 colleagues grouped into teams for each major feature, leading inter-group communication and conflict management, managing Git repositories and access control, and configuring project management tools for use by all members.",
 			},
 			{
 				"periods": [{
@@ -182,8 +182,8 @@ class CVData {
 					"end":   new Date("2020-11-30"),
 					"name":  "2020",
 				}],
-				"title":   "Co-Developed ARCRA PoC Mobile App",
-				"comment": "Developed standalone proof-of-concept radio app on Android using Dart & Flutter.",
+				"title":   "Full-Stack Developer at ARCRA",
+				"comment": "I co-developed a standalone proof-of-concept Android app for a music radio service using Dart & Flutter. My main role was to design and develop internal functionality that UI elements could easily integrate with, such as the audio playback engine and song metadata service.",
 			},
 			{
 				"periods": [{
@@ -191,8 +191,8 @@ class CVData {
 					"end":   new Date("2020-11-30"),
 					"name":  "2019 - 2020",
 				}],
-				"title":   "Co-Developed TuksFM Mobile App",
-				"comment": "Acted primarily as back-end developer (MySQL + PHP to extend legacy API; Dart & Flutter for app-side API calls).",
+				"title":   "Full-Stack Developer at TuksFM Radio",
+				"comment": "I developed a lightweight API piggybacking off an existing Wordpress instance (using PHP & MySQL), and developed client-side integration functionality for the matching music radio app for Android (using Dart & Flutter).",
 			},
 			{
 				"periods": [
@@ -207,8 +207,8 @@ class CVData {
 						"name":  "2018 (Dec)",
 					},
 				],
-				"title":  "Front-End Development Internship at Kwaden Software Development",
-				"comment": "Gained experience in process-driven development and microservice-centric development.",
+				"title":  "Holiday Intern at Kwaden Software Development",
+				"comment": "I worked with the development team during holiday periods (when possible between university study terms) to gain experience working with a small, diverse team using process-driven development and CI/CD. I was exposed to the use of Spring Boot (Java) for web services with tightly integrated front-ends using JS, HTML, CSS, and the Kendo-UI component library.",
 			},
 			{
 				"periods": [{
@@ -217,7 +217,7 @@ class CVData {
 					"name":  "2017",
 				}],
 				"title":  "Full-Time Intern & Junior Developer at FirstView Media",
-				"comment": "Primarily acted as MySQL, PHP & JS developer and managed several remote servers. Also aided HTML & CSS development and performed full-stack development for solo projects.",
+				"comment": "I developed full-stack applications using PHP & MySQL for RESTful web services, and used JavaScript (JQuery), HTML & CSS for client-facing web applications.<br/>In the second half of my internship, I was allowed to take lead on a collaborative project with a corporate client, which included direct communication with management staff from the other company. Tasks included the aggregation and collation of large legacy data sets (several ~400GiB databases) and management of scheduled tasks to interact with highly sensitive off-site systems for third-party clients.",
 			},
 		];
 	}
@@ -241,7 +241,7 @@ class CVData {
 					"name":  "2018 - 2020",
 				}],
 				"title":   "Completed BSc Computer Science degree with distinction at University of Pretoria",
-				"comment": "Learned invaluable skills in software engineering, mathematics, and time- and stress-management at one of South Africa's most highly rated Computer Science departments.",
+				"comment": "Learned invaluable skills in software engineering, mathematics, and time- and stress-management at one of South Africa's most highly rated Computer Science departments. Major categories covered include discrete mathematics, data structures & algorithms, design patterns, operating systems, compiler construction, and graphics programming.",
 			},
 			{
 				"periods": [{
@@ -250,7 +250,7 @@ class CVData {
 					"name":  "2016",
 				}],
 				"title":  "Achieved South African National Senior Certificate (IEB)",
-				"comment": "Thomas More College (Kloof, KwaZulu-Natal, ZA)<br/><ul><li>Core Mathematics - 96% | Information Technology - 94%</li><li>Finalist (Top 20 in SA) in South African Computing Olympiad 2016</li><li>Qualified for Mathematics Olympiad round 3 (semi-final) 2015</li></ul>",
+				"comment": "Attended Thomas More College (Kloof, KwaZulu-Natal, ZA)<br/><ul><li>Core Mathematics - 96% | Information Technology - 94%</li><li>Finalist (Top 20 in SA) in South African Computing Olympiad 2016</li><li>Qualified for Mathematics Olympiad round 3 (semi-final) 2015</li></ul>",
 			},
 			{
 				"periods": [{
