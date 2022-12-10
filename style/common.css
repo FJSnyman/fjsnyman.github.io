@@ -92,6 +92,7 @@ h2.section-name:after {
 	display: block;
 	font-size: 12pt;
 	line-height: 14pt;
+	margin: 0;
 }
 
 .comment {
@@ -117,7 +118,7 @@ h2.section-name:after {
 }
 
 .lhs-block {
-	width: 28%;
+	width: 14%;
 	text-align: right;
 	display: flex;
 	justify-content: right;
@@ -129,11 +130,12 @@ h2.section-name:after {
 }
 
 .rhs-block {
-	width: 68%;
+	width: 76%;
 	display: block;
 	border-left: 1px solid var(--color-stroke-pr);
 	padding: 5px 10px;
-	border-radius: 10px;
+	border-radius: 4px;
+	text-align: justify;
 }
 
 /* Collection Elements */
