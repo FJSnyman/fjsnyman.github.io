@@ -6,16 +6,32 @@ class CVData {
 		// Personal Info
 		const personalInfo = this.personalInfo();
 		document.getElementById("name").innerHTML = personalInfo.name;
-		document.getElementById("email").innerHTML = personalInfo.email;
-		document.getElementById("email-link").href = `mailto:${personalInfo.email}`;
 		document.getElementById("cover").innerHTML = personalInfo.cover.join("<br/>");
-
+		const buttonArea = document.getElementById("personal-info-buttons");
+		if (personalInfo.links) {
+			const template = document.getElementById("template-button").innerHTML;
+			const collection = [];
+			for (const link of personalInfo.links) {
+				const element = template
+					.replace('${prop-icon}', link.icon)
+					.replace('${prop-name}', link.name)
+					.replace('${prop-href}', link.href)
+				collection.push(element);
+			}
+			const tm = document.createElement("template");
+			tm.innerHTML = collection.join("\n");
+			buttonArea.appendChild(tm.content);
+		} else {
+			buttonArea.remove();
+		}
+		
 		// Work History
 		const workHistory = this.workHistory();
 		if (workHistory != null) {
 			const workList = document.getElementById("work-history");
 			const template = document.getElementById("template-histitem").innerHTML;
 			const period = template.match(/(.*)\$\{litem-when\}(.*)/);
+			const comment = template.match(/(.*)\$\{litem-comment\}(.*)/);
 
 			workHistory.sort((a, b) => b.periods[0]['end'].compareTo(a.periods[0]['end']).orIfZero(() => b.periods[0]['start'].compareTo(a.periods[0]['start'])));
 
@@ -23,14 +39,24 @@ class CVData {
 			for (const item of workHistory) {
 				const element = template
 					.replace("${prop-title}", item.title)
-					.replace("${prop-comment}", item.comment);
+					.replace("${prop-place}", item.place);
 
 				item.periods.sort((a, b) => b.start.valueOf() - a.start.valueOf());
 				let whenString = "";
 				for (const p of item.periods) {
 					whenString += `${period[1]}${p['name']}${period[2]}`;
 				}
-				collection.push(element.replace(/<.*\$\{litem-when\}.*/, whenString));
+
+				const comments = [];
+				for (const c of item.comments) {
+					comments.push(`${comment[1]}<b>${c['main']}</b><br/>${c['body']}${comment[2]}`);
+				}
+				const commentString = comments.join('');
+
+				const row = element
+					.replace(/<.*\$\{litem-when\}.*>/, whenString)
+					.replace(/<.*\$\{litem-comment\}.*>/, commentString);
+				collection.push(row);
 			}
 
 			const tm = document.createElement("template");
@@ -53,14 +79,15 @@ class CVData {
 			for (const item of education) {
 				const element = template
 					.replace("${prop-title}", item.title)
-					.replace("${prop-comment}", item.comment);
+					.replace("${prop-place}", item.place)
+					.replace("${litem-comment}", item.comment);
 
 				item.periods.sort((a, b) => b.start.valueOf() - a.start.valueOf());
 				let periodString = "";
 				for (const p of item.periods) {
 					periodString += `${period[1]}${p['name']}${period[2]}`;
 				}
-				collection.push(element.replace(/<.*\$\{litem-when\}.*/, periodString));
+				collection.push(element.replace(/<.*\$\{litem-when\}.*>/, periodString));
 			}
 
 			const tm = document.createElement("template");
@@ -80,13 +107,14 @@ class CVData {
 			const collection = [];
 			for (const skill of skills) {
 				const element = template
+					.replace("${prop-type}", skill.type)
 					.replace("${prop-title}", skill.title);
 
 				let itemString = "";
 				for (const item of skill['items']) {
 					itemString += `${items[1]}${item}${items[2]}`;
 				}
-				collection.push(element.replace(/<.*\$\{litem-item\}.*/, itemString));
+				collection.push(element.replace(/<.*\$\{litem-item\}.*>/, itemString));
 			}
 
 			const tm = document.createElement("template");
@@ -99,7 +127,7 @@ class CVData {
 		// Interests
 		const interests = this.interests();
 		if (interests != null) {
-			const interestList = document.getElementById("interests").children.item(1);
+			const interestList = document.getElementById("interests");
 			const template = document.getElementById("template-interestitem").innerHTML;
 			const items = template.match(/(.*)\$\{litem-interest\}(.*)/);
 
@@ -107,7 +135,10 @@ class CVData {
 			for (const item of interests) {
 				itemString += `${items[1]}${item}${items[2]}`;
 			}
-			interestList.innerHTML = itemString;
+
+			const tm = document.createElement("template");
+			tm.innerHTML = template.replace(/<.*\$\{litem-interest\}.*>/, itemString);
+			interestList.appendChild(tm.content);
 		} else {
 			document.getElementById("interests").remove();
 		}
@@ -138,7 +169,18 @@ class CVData {
 	static personalInfo() {
 		return {
 			"name": "Francois Snyman",
-			"email": "hello@fjsnyman.co.za",
+			"links": [
+				{
+					"name": "Download CV",
+					"icon": "ico/download.svg",
+					"href": "downloads/fjsnyman-cv-download.pdf",
+				},
+				{
+					"name": "hello@fjsnyman.co.za",
+					"icon": "ico/email.svg",
+					"href": "mailto:hello@fjsnyman.co.za",
+				},
+			],
 			"cover": [
 				"I am a software developer with experience across various programming languages and software development tools, currently specialising in Java Spring microservices and Kubernetes infrastructure management.",
 				"I love learning new skills to empower myself, my team and my users in facing the latest and greatest challenges before us.",
@@ -155,8 +197,22 @@ class CVData {
 					"end": new Date(),
 					"name": "2021 - Present",
 				}],
-				"title": "Java Developer at Kwaden Software Development",
-				"comment": "I design and develop microservices and APIs using Spring Boot (Java) using MySQL, AMQ with RabbitMQ, IAC with Kubernetes, and CICD with Jenkins and GitHub Actions. Daily tasks include project management with Jira and Confluence, writing Bash or Powershell scripts, log monitoring and diagnostics, and server management using Rancher, Portainer, Kubectl, or SSH.<br/>I have researched, presented and implemented several projects integrating new techniques and technologies into our existing processes and systems. Projects were presented to directors and technical managers, then I was assigned to lead the project's implementation, task delegation and collaboration efforts with other departments.",
+				"title": "Java Developer",
+				"place": "Kwaden Software Development",
+				"comments": [
+					{
+						"main": "Designed and developed microservices and APIs",
+						"body": "using Spring Boot (Java) using MySQL, AMQ with RabbitMQ, IAC with Kubernetes, scripting with Bash and Powershell, and CICD with Jenkins and GitHub Actions."
+					},
+					{
+						"main": "Performed various administrative tasks daily",
+						"body": "including project management with Jira and Confluence, log monitoring and diagnostics, and server management using Rancher, Portainer, Kubectl, or SSH."
+					},
+					{
+						"main": "Researched, presented and implemented new techniques and technologies",
+						"body": "to improve existing systems and processes. Presentations were made to directors and technical managers, then I was assigned to lead the project's implementation, task delegation and collaboration efforts with other departments."
+					},
+				],
 			},
 			{
 				"periods": [{
@@ -164,8 +220,14 @@ class CVData {
 					"end": new Date("2020-10-15"),
 					"name": "2020",
 				}],
-				"title": "Integration Developer at Truckin-IT",
-				"comment": "I co-developed the mobile app for a start-up shipping and logistics management solution with automated load-sharing and driver route optimisation. I primarily developed the mobile app's internal functionality for network interactions including remote calls (RESTful API calls, response caching and batching) and promise-based middleware to improve front-end developer experience.",
+				"title": "Integration Developer",
+				"place": "Truckin-IT Start-Up Mobile App",
+				"comments": [
+					{
+						"main": "Developed internal functionality for Android app with Dart & Flutter",
+						"body": "for a shipping and logistics management solution with automated load-sharing and driver route optimisation. Included network call handling (RESTful API calls, response caching and batching) and promise-based middleware to improve front-end developer experience."
+					},
+				],
 			},
 			{
 				"periods": [{
@@ -173,8 +235,18 @@ class CVData {
 					"end": new Date("2020-06-31"),
 					"name": "2020",
 				}],
-				"title": "Integration Developer for large-team university project",
-				"comment": "I acted as lead developer for an AI-driven speech-to-image mobile app, managing development of the core engine, network controllers, and unit testing.<br/>I handled project management for over 40 peers in various sub-teams, leading inter-group communication and conflict management, managing Git repositories and access control, and configuring project management tools.",
+				"title": "Integration Developer",
+				"place": "large-team university project (University of Pretoria)",
+				"comments": [
+					{
+						"main": "Lead development of an AI-driven speech-to-image Android app",
+						"body": "including development of the core engine, network controllers, and unit testing."
+					},
+					{
+						"main": "Lead overarching project management",
+						"body": "to coordinate 40 peers in various sub-teams, lead inter-group communication and conflict management, configure project management tools, and manage Git repositories and access control."
+					},
+				],
 			},
 			{
 				"periods": [{
@@ -182,8 +254,14 @@ class CVData {
 					"end": new Date("2020-11-30"),
 					"name": "2020",
 				}],
-				"title": "Full-Stack Developer at ARCRA",
-				"comment": "I co-developed a standalone proof-of-concept Android app for a music radio service using Dart & Flutter. My main role was to design and develop internal functionality that UI elements could easily integrate with, such as the audio playback engine and song metadata service.",
+				"title": "Full-Stack Developer",
+				"place": "ARCRA Demo Mobile App",
+				"comments": [
+					{
+						"main": "Co-developed demo Android app using Dart & Flutter",
+						"body": "for a conceptual music radio service with user-customisable features. Development tasks were full-stack, with me primarily building internal functionality such as the audio playback engine and song metadata service, and middleware for UI elements to easily access and manage that data."
+					},
+				],
 			},
 			{
 				"periods": [{
@@ -191,24 +269,35 @@ class CVData {
 					"end": new Date("2020-11-30"),
 					"name": "2019 - 2020",
 				}],
-				"title": "Full-Stack Developer at TuksFM Radio",
-				"comment": "I developed a lightweight API piggybacking off an existing Wordpress instance (PHP & MySQL), and developed client-side integration functionality for the matching music radio app for Android (Dart & Flutter).",
+				"title": "Full-Stack Developer",
+				"place": "TuksFM Radio Mobile App",
+				"comments": [
+					{
+						"main": "Developed a lightweight web API (PHP & MySQL)",
+						"body": "to serve blog and schedule data from an existing Wordpress instance."
+					},
+					{
+						"main": "Developed internal Android app functionality (Dart & Flutter)",
+						"body": " handling network calls to the web service, caching and state management."
+					},
+				],
 			},
 			{
 				"periods": [
 					{
-						"start": new Date("2019-11-21"),
-						"end": new Date("2019-12-21"),
-						"name": "2019 (Dec)",
-					},
-					{
 						"start": new Date("2018-11-21"),
-						"end": new Date("2018-12-21"),
-						"name": "2018 (Dec)",
+						"end": new Date("2019-12-21"),
+						"name": "2018 - 2019",
 					},
 				],
-				"title": "Holiday Intern at Kwaden Software Development",
-				"comment": "I worked with the development team during holiday periods (when possible between university study terms) to gain experience working with a small, diverse team using process-driven development and CI/CD. I was exposed to the use of Java Spring Boot for web services with tightly integrated front-ends using JS, HTML, CSS, and the Kendo-UI component library.",
+				"title": "Holiday Intern",
+				"place": "Kwaden Software Development",
+				"comments": [
+					{
+						"main": "Gained experience with Spring Boot (Java), process-driven developement, and CICD",
+						"body": "working during holiday periods with a small, diverse team to develop various web services and tightly integrated front-end apps using HTML, JS, CSS and the Kendo UI library."
+					},
+				],
 			},
 			{
 				"periods": [{
@@ -216,8 +305,18 @@ class CVData {
 					"end": new Date("2017-12-31"),
 					"name": "2017",
 				}],
-				"title": "Full-Time Intern & Junior Developer at FirstView Media",
-				"comment": "I developed full-stack applications using PHP & MySQL for RESTful web services, and used JavaScript (JQuery), HTML & CSS for client-facing web applications.<br/>I was later allowed to take lead on a collaborative project with a corporate client, which included liaising direct with their management. Tasks included the aggregation and collation of large legacy data sets (several ~400GiB databases) and management of scheduled tasks to interact with highly sensitive off-site systems for third-party clients.",
+				"title": "Full-Time Intern & Junior Developer",
+				"place": "FirstView Media",
+				"comments": [
+					{
+						"main": "Developed full-stack web services (PHP & MySQL)",
+						"body": "with RESTful web APIs, with client-side web applications using JavaScript (JQuery), HTML and CSS."
+					},
+					{
+						"main": "Took lead on a collaborative project with a corporate client",
+						"body": "which included liaising directly with management staff, scripting the aggregation and collation of large legacy data sets (several ~400GiB databases), and scripting tasks to maintain highly sensitive off-site systems.",
+					},
+				],
 			},
 		];
 	}
@@ -231,7 +330,8 @@ class CVData {
 					"end": new Date("2021-05-26"),
 					"name": "Early 2021"
 				}],
-				"title": "Received accolades from University of Pretoria",
+				"title": "Received Accolades",
+				"place": "University of Pretoria",
 				"comment": "Received several awards during graduation and award ceremonies:<ul><li>graduated with distinction (75.2% aggregate)</li><li>2nd runner-up for top achiever in BSc Computer Science</li><li>industry project group winner for 'Best Architectural Awareness' and 'Software Engineering Excellence'</li></ul>"
 			},
 			{
@@ -240,7 +340,8 @@ class CVData {
 					"end": new Date("2020-12-31"),
 					"name": "2018 - 2020",
 				}],
-				"title": "Completed BSc Computer Science degree with distinction at University of Pretoria",
+				"title": "BSc Computer Science degree (with distinction)",
+				"place": "University of Pretoria",
 				"comment": "Learned invaluable skills in software engineering, mathematics, and time- and stress-management at one of South Africa's most highly rated Computer Science departments. Major categories covered include discrete mathematics, data structures & algorithms, design patterns, operating systems, compiler construction, and graphics programming.",
 			},
 			{
@@ -249,8 +350,9 @@ class CVData {
 					"end": new Date("2016-12-31"),
 					"name": "2016",
 				}],
-				"title": "Achieved South African National Senior Certificate (IEB)",
-				"comment": "Attended Thomas More College (Kloof, KwaZulu-Natal, ZA)<br/><ul><li>Core Mathematics - 96% | Information Technology - 94%</li><li>Finalist (Top 20 in SA) in South African Computing Olympiad 2016</li><li>Qualified for Mathematics Olympiad round 3 (semi-final) 2015</li></ul>",
+				"title": "South African National Senior Certificate (IEB)",
+				"place": "Thomas More College (South Africa)",
+				"comment": "Completed with senior colours with top-10 academic achiever awards<br/><ul><li>Information Technology - 94% (top of class)</li><li>Core Mathematics - 96%</li><li>Finalist (Top 20 nationally) in South African Computing Olympiad 2016</li><li>Qualified for Mathematics Olympiad round 3 (semi-final) 2015</li></ul>",
 			},
 			{
 				"periods": [{
@@ -258,7 +360,8 @@ class CVData {
 					"end": new Date("2016-11-01"),
 					"name": "2016",
 				}],
-				"title": "Granted Student Membership to IITPSA (Institute of IT Professionals SA)",
+				"title": "Granted Student Membership to IITPSA",
+				"place": "Institute of IT Professionals SA",
 				"comment": "Invited to join the institute to commemorate finalist placement in the South African Computing Olympiad 2016.",
 			},
 		];
@@ -268,37 +371,41 @@ class CVData {
 	static skills() {
 		return [
 			{
+				"type": "Technical Skill",
 				"title": "Software Development",
 				"items": [
-					"Highly proficient with industry-standard development tools such as Bash, Docker and Git.",
-					"Highly experienced with REST and GraphQL API architectures.",
-					"Experienced building software from the ground up, and usings frameworks like Spring Boot and Flutter.",
-					"Experienced with IAC and CICD using Kubernetes and GitHub Actions.",
+					"Highly proficient with industry-standard development tools including <b>Bash</b>, <b>Docker</b> and <b>Git</b>.",
+					"Experienced with <b>REST</b> and <b>GraphQL</b> web API architectures.",
+					"Experienced building software using <b>ground-up approaches</b>, or frameworks like <b>Spring Boot</b> and <b>Flutter</b>.",
+					"Experienced with <b>IAC</b> and <b>CICD</b> using <b>Kubernetes</b> and <b>GitHub Actions</b>.",
 				],
 			},
 			{
+				"type": "Technical Skill",
 				"title": "Programming Languages",
 				"items": [
-					"High proficiency with Java SE, Dart, SQL, and Bash Scripting.",
-					"Moderate proficiency with HTML, CSS, native JS, and PHP.",
-					"Basic proficiency with Golang, Python, C++ 17, native C, x86-64 assembly (NASM/YASM).",
+					"High proficiency with <b>Java SE</b>, <b>Dart</b>, <b>SQL</b>, and <b>Bash Scripting</b>.",
+					"Moderate proficiency with <b>HTML</b>, <b>CSS</b>, <b>native JS</b>, and <b>PHP</b>.",
+					"Basic proficiency with <b>Golang</b>, <b>Python</b>, <b>C++ 17</b>, <b>native C</b>, and <b>x86-64 assembly</b> (NASM/YASM).",
 				],
 			},
 			{
+				"type": "Soft Skill",
 				"title": "Organisation & Leadership",
 				"items": [
-					"Experience as the lead developer and primary point of contact for multiple ongoing and legacy projects simultaneously.",
-					"Experience managing task assignment and facilitating communication in small and large teams with a flat hierarchy.",
-					"Experience with project management tools and continuous integration systems.",
+					"Experience as the <b>lead developer</b> and <b>primary point of contact</b> for multiple <b>ongoing and legacy projects</b> simultaneously.",
+					"Experience managing <b>task assignment</b> and <b>facilitating communication</b> in small and large teams with a flat hierarchy.",
+					"Experience with <b>project management tools</b> and <b>continuous integration systems</b>.",
 				],
 			},
 			{
+				"type": "Soft Skill",
 				"title": "Communication",
 				"items": [
-					"Can clearly present and discuss development goals and concepts at various levels of complexity and transparency as needed, be it to expert developers to clients with minimal technical knowledge.",
-					"Able to maintain clear, calm discussion when experiencing confusion or stubbornnes with others.",
-					"Quick to build and maintain strong relationships with coworkers, leaders and clients.",
-					"Can establish and maintain vision of short- and long-term goals for a project.",
+					"Can clearly <b>present and discuss</b> development goals and concepts at <b>various levels of complexity</b> and transparency as needed, be it to expert developers to clients with minimal technical knowledge.",
+					"Able to maintain <b>clear, calm discussion</b> when experiencing confusion or stubbornnes with others.",
+					"Quick to <b>build and maintain strong relationships</b> with coworkers, leaders and clients.",
+					"Can <b>establish and maintain vision</b> of short- and long-term goals for a project.",
 				],
 			},
 		];

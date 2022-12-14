@@ -1,0 +1,13 @@
+@media(max-width: 794px) {
+	#name {
+		font-size: 50px;
+	}
+
+    body > #main {
+        margin: 30px 16px;
+    }
+
+    #heading {
+        font-size: 22px;
+    }
+}

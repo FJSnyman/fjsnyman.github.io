@@ -11,7 +11,10 @@ body[data-theme="dark"] {
 	--color-background-pr: #0F0F0F; /*  6% Grey */
 	--color-background-sc: #0C0C0C; /* 11% Grey */
 
-	--color-background-pr-transparent: #0F0F0F00; /*  6% Grey, 0 opacity */
+	--color-button: #333333;
+
+	--color-drop-shadow: #00000011; /*  Black, 11% opacity */
+	--color-drop-shadow-hover: #00000020; /*  Black, 20% opacity */
 }
 
 body[data-theme="light"] {
@@ -26,5 +29,8 @@ body[data-theme="light"] {
 	--color-background-pr: #FFFFFF;
 	--color-background-sc: #AFAFAF;
 
-	--color-background-pr-transparent: #FAFACB00;
+	--color-button: #F0F0F0;
+
+	--color-drop-shadow: #00000011;
+	--color-drop-shadow-hover: #00000020;
 }

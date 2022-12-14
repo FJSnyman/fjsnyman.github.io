@@ -5,6 +5,7 @@
 	<title>Francois Snyman | Curriculum Vitae</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="style/common.css" />
+	<link rel="stylesheet" type="text/css" href="style/responsive.css" />
 	<link rel="stylesheet" type="text/css" href="style/theme.css" />
 
 	<template id="template-histitem">
@@ -14,7 +15,8 @@
 			</div>
 			<div class="rhs-block">
 				<span class="title history-title">${prop-title}</span>
-				<p class="comment">${prop-comment}</p>
+				<span class="title history-place">${prop-place}</span>
+				<span class="comment">${litem-comment}</span>
 			</div>
 		</div>
 	</template>
@@ -22,9 +24,10 @@
 	<template id="template-skillitem">
 		<div class="row">
 			<div class="lhs-block">
-				<h4 class="title">${prop-title}</h4>
+				<h2 class="title">${prop-type}</h2>
 			</div>
 			<div class="rhs-block">
+				<h4 class="title skill-title">${prop-title}</h4>
 				<ul class="skill-items">
 					<li class="item">${litem-item}</li>
 				</ul>
@@ -33,7 +36,9 @@
 	</template>
 
 	<template id="template-interestitem">
-		<li class="item">${litem-interest}</li>
+		<ul class="interest-items">
+			<li class="item">${litem-interest}</li>
+		</ul>
 	</template>
 
 	<template id="template-downloaditem">
@@ -45,28 +50,33 @@
 		</a>
 	</template>
 
+	<template id="template-button">
+		<a  class="button" href="${prop-href}">
+			<div class="button-icon" style="background-image: url(${prop-icon});"></div>
+			<span class="button-label">${prop-name}</span>
+		</a>
+	</template>
+
 	<script src="data.js"></script>
 </head>
 
 <body data-theme="dark">
-	<div id="toggle" onclick="let n = document.body.getAttribute('data-theme') == 'dark' ? 'light' : 'dark'; document.body.setAttribute('data-theme', n); cset('theme', n);">
+	<div id="toggle"
+		onclick="let n = document.body.getAttribute('data-theme') == 'dark' ? 'light' : 'dark'; document.body.setAttribute('data-theme', n); cset('theme', n);">
 		<div id="slider">
-			<img src="ico/light.png" alt="light">
-			<img src="ico/dark.png" alt="dark">
+			<img src="ico/light.svg" alt="light">
+			<img src="ico/dark.svg" alt="dark">
 		</div>
 	</div>
 
 	<div id="main">
 
-		<h1>Curriculum Vitae</h1>
+		<h2 id="heading">Curriculum Vitae</h2>
 
-		<hr class="soft-rule" />
-
-		<div id="personal-info" class="section">
-			<h2 id="name"></h2>
-			<a id="email-link"><h3 id="email"></h3></a>
-			<div id="cover" class="comment">
-			</div>
+		<div id="personal-info">
+			<h1 id="name"></h1>
+			<p id="cover" class="comment"></p>
+			<div id="personal-info-buttons"></div>
 		</div>
 
 		<div id="work-history" class="section">
@@ -91,9 +101,6 @@
 
 			<h2 class="section-name">Interests</h2>
 
-			<ul class="interest-items">
-			</ul>
-
 		</div>
 
 		<div id="downloads" class="section">
@@ -105,7 +112,7 @@
 
 		</div>
 
-		<div id="footnote">
+		<div id="footnote" class="section">
 
 			<span>References and Additional Documents Available on Request</span>
 
@@ -121,7 +128,7 @@
 	}
 	const cset = (k, v) => document.cookie = `${k}=${v};expires=${new Date(Date.now() + 604800000).toISOString()}`;
 	document.body.style["transition"] = "none";
-	document.body.setAttribute('data-theme', cget('theme'));
+	document.body.setAttribute('data-theme', cget('theme') ?? 'dark');
 	setTimeout(() => document.body.style["transition"] = "", 810);
 	CVData.populateData();
 </script>
