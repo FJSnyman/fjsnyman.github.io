@@ -1,4 +1,4 @@
-@media(max-width: 794px) {
+@media(max-width: 810px) {
 	#name {
 		font-size: 50px;
 	}
@@ -9,5 +9,18 @@
 
     #heading {
         font-size: 22px;
+    }
+
+    #cover {
+        font-size: 12pt;
+    }
+
+    .lhs-block {
+        padding-right: 14px;
+    }
+
+    .rhs-block {
+        padding-left: 14px;
+        margin-right: inherit;
     }
 }

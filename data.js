@@ -6,7 +6,7 @@ class CVData {
 		// Personal Info
 		const personalInfo = this.personalInfo();
 		document.getElementById("name").innerHTML = personalInfo.name;
-		document.getElementById("cover").innerHTML = personalInfo.cover.join("<br/>");
+		document.getElementById("cover").innerHTML = personalInfo.cover.map(p => `<p>${p}</p>`).join("");
 		const buttonArea = document.getElementById("personal-info-buttons");
 		if (personalInfo.links) {
 			const template = document.getElementById("template-button").innerHTML;
@@ -182,8 +182,8 @@ class CVData {
 				},
 			],
 			"cover": [
-				"I am a software developer with experience across various programming languages and software development tools, currently specialising in Java Spring microservices and Kubernetes infrastructure management.",
-				"I love learning new skills to empower myself, my team and my users in facing the latest and greatest challenges before us.",
+				"I am a software developer with experience across various programming languages and software development tools, currently specialising in Java Spring microservices and Kubernetes infrastructure management. My focus is always on producing powerful, scalable, maintainable systems with both high efficiency and easy-to-use APIs for other developers to interact with.",
+				"My strengths lie in rapid problem solving and solution development, and I love constantly learning new skills to empower myself, my team and my users in facing the latest and greatest challenges before us. I pride myself on a broad range of experiences and knowledge that I can leverage when deciding how to solve a problem, such deciding to use a low- or high-level programming language for a given application, or whether to use a simple and easy API like REST or a powerful but complex alternative like GraphQL or RPC.",
 			],
 		};
 	}
@@ -195,14 +195,14 @@ class CVData {
 				"periods": [{
 					"start": new Date("2021-01-18"),
 					"end": new Date(),
-					"name": "2021 - Present",
+					"name": "2021 - Now",
 				}],
 				"title": "Java Developer",
 				"place": "Kwaden Software Development",
 				"comments": [
 					{
 						"main": "Designed and developed microservices and APIs",
-						"body": "using Spring Boot (Java) using MySQL, AMQ with RabbitMQ, IAC with Kubernetes, scripting with Bash and Powershell, and CICD with Jenkins and GitHub Actions."
+						"body": "using Spring Boot (Java) using MySQL, AMQ with RabbitMQ, IAC with Kubernetes, scripting with Bash and Powershell, and CICD with Jenkins and GitHub Actions. I developed both brand new systems for new projects and features, as well as microservice replacements for monolithic legacy applications."
 					},
 					{
 						"main": "Performed various administrative tasks daily",
@@ -211,6 +211,10 @@ class CVData {
 					{
 						"main": "Researched, presented and implemented new techniques and technologies",
 						"body": "to improve existing systems and processes. Presentations were made to directors and technical managers, then I was assigned to lead the project's implementation, task delegation and collaboration efforts with other departments."
+					},
+					{
+						"main": "Trained and mentored fellow software developers",
+						"body": "teaching interns and junior developers about our existing systems and technologies, established developers when adopting a new technology, or experienced front-end developers when transitioning to back-end development."
 					},
 				],
 			},
@@ -415,8 +419,8 @@ class CVData {
 	static interests() {
 		return [
 			"Software engineering and research",
+			"Low-level development, design and optimisation",
 			"Digital artistry and photography",
-			"Woodwork and home improvement",
 			"Designing, developing, and playing video games",
 		];
 	}
